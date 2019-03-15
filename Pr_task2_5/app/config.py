@@ -19,7 +19,7 @@ class Config:
 
 # 开发环境
 class DevelopmentConfig(Config):
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456@192.168.3.122:3306/db_phone_analysis_data_2'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:123456789@127.0.0.1:3306/db_phone_analysis_data_2'
 
 
 # 测试环境

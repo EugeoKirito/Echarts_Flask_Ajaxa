@@ -49,6 +49,7 @@
     </div>
 </body>
 <script type="text/javascript" src="/static/js/setTimeData.js"></script>
+<script type="text/javascript" src="/static/js/ajaxData.js"></script>
 <script>
 var nameBarr = [];
     //销量排名前三的手机型号名称数组nameBarr
@@ -62,25 +63,69 @@ var lineThreeData = [];
 
 function setSeries(){
 
+    return [{
+
+    name:nameBarr[0],
+    type:'line',
+    areaStyle:{},
+    stack:'One',
+    data:lineOneData
+
+
+    },
+
+    {
+     name:nameBarr[1],
+    type:'line',
+    areaStyle:{},
+    stack:'One',
+    data:lineTwoData
+    },
+
+    {
+     name:nameBarr[2],
+    type:'line',
+    areaStyle:{},
+    stack:'One',
+    data:lineThreeData
+    }]
+
+
+
     };
+timeArr=[];
+channelArr=[];
+scoreArr=[];
+
+var all
+
+all=ajaxData(timeArr,channelArr,scoreArr) ;
+
+timeArr=all[0];
+channelArr=all[1];
+scoreArr=all[2];
+
+
 
 //销售量排名前三的手机型号的销售高峰在哪个时间段数据数组
-var timeArr =[
-    [{% for r in tstc_res %} "{{r.fld_phone_name}}", {% endfor %}],
-    [{% for r in tstc_res %} "{{r.fld_sales_time}}", {% endfor %}],
-    [{% for r in tstc_res %} "{{r.fld_sale_count}}", {% endfor %}]
-   ];
+//var timeArr =[
+//    [{% for r in tstc_res %} "{{r.fld_phone_name}}", {% endfor %}],
+//    [{% for r in tstc_res %} "{{r.fld_sales_time}}", {% endfor %}],
+ //   [{% for r in tstc_res %} "{{r.fld_sale_count}}", {% endfor %}]
+//   ];
+
 //销量排名前十的手机型号的销售渠道是什么数据数组
-var channelArr =[
-    [{% for r in tscc_res %} "{{r.fld_phone_name}}", {% endfor %}],
-    [{% for r in tscc_res %} "{{r.fld_sales_channel}}", {% endfor %}],
-    [{% for r in tscc_res %} "{{r.fld_sale_count}}", {% endfor %}]
-   ];
+//var channelArr =[
+ //   [{% for r in tscc_res %} "{{r.fld_phone_name}}", {% endfor %}],
+  //  [{% for r in tscc_res %} "{{r.fld_sales_channel}}", {% endfor %}],
+ //   [{% for r in tscc_res %} "{{r.fld_sale_count}}", {% endfor %}]
+ //  ];
 //用户评分最高的10个手机型号是什么数据数组
-var scoreArr =[
-    [{% for r in tusc_res %} "{{r.fld_phone_name}}", {% endfor %}],
-    [{% for r in tusc_res %} "{{r.fld_user_score}}", {% endfor %}],
-   ];
+//var scoreArr =[
+ //   [{% for r in tusc_res %} "{{r.fld_phone_name}}", {% endfor %}],
+ //   [{% for r in tusc_res %} "{{r.fld_user_score}}", {% endfor %}],
+ //  ];
+
 setTimeData(timeArr,nameBarr,dateArr,lineOneData,lineTwoData,lineThreeData);
 
 var timeChart = echarts.init(document.getElementById('timeChart'));
